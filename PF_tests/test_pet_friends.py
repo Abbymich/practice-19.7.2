@@ -166,20 +166,20 @@ def test_add_pet_with_special_characters_in_variable_animal_type(name='Sam', age
     assert symbol[0] not in result['animal_type'], 'Питомец добавлен с недопустимыми спец.символами'
 
 
-def test_add_pet_with_numbers_in_variable_animal_type(name='Fedor', animal_type='34562', age='3',
-                                                      pet_photo='images/Fedor.jpg'):
+def test_add_pet_with_numbers_in_variable_animal_type(name='Sam', animal_type='34562', age='2',
+                                                      pet_photo='images/Sam.jpg'):
     '''Проверка с негативным сценарием. Добавление питомца с цифрами вместо букв в переменной animal_type.
     Тест не будет пройден если питомец будет добавлен на сайт с цифрами вместо букв в поле порода.'''
     pet_photo = os.path.join(os.path.dirname(__file__), pet_photo)
 
-    _, api_key = pf.get_app_key(valid_email, valid_password)
-    status, result = pf.add_new_pets(api_key, name, animal_type, age, pet_photo)
+    _, api_key = pf.get_api_key(valid_email, valid_password)
+    status, result = pf.post_add_new_pet(api_key, name, animal_type, age, pet_photo)
 
     assert status == 200
     assert animal_type not in result['animal_type'], 'Питомец добавлен на сайт с цифрами вместо букв в поле порода'
 
 
-def test_add_pet_with_a_lot_of_words_in_variable_animal_type(name='Fedor', age='2', pet_photo='images/Fedor.jpg'):
+def test_add_pet_with_a_lot_of_words_in_variable_animal_type(name='Sam', age='2', pet_photo='images/Sam.jpg'):
     '''Проверка с негативным сценарием. Добавления питомца название породы которого превышает 10 слов
     Тест не будет пройден если питомец будет добавлен на сайт с названием породы состоящим из более 10 слов'''
 
